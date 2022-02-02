@@ -1,10 +1,12 @@
 package com.sudip.nitvmovie;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -117,4 +119,30 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(nitvMovieAdapter);
         nitvMovieAdapter.notifyDataSetChanged();
     }
+    private void ShowAlertToExit() {
+        AlertDialog.Builder alertdialog = new AlertDialog.Builder(this);
+        alertdialog.setMessage("Are You Sure ?");
+        alertdialog.setTitle("Exit NITV APP");
+        alertdialog.setCancelable(true);
+        alertdialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog dialog = alertdialog.create();
+        dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        ShowAlertToExit();
+    }
+
     }
