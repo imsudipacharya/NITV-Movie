@@ -31,7 +31,7 @@ public class NitvMovieAdapter extends RecyclerView.Adapter<NitvMovieAdapter.MyVi
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        v = inflater.inflate(R.layout.main_movie_item,parent,false);
+        v = inflater.inflate(R.layout.main_movie_item, parent, false);
 
         return new MyViewHolder(v);
     }
@@ -40,44 +40,43 @@ public class NitvMovieAdapter extends RecyclerView.Adapter<NitvMovieAdapter.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.movieTitle.setText(nitvMovieModelList.get(position).getOriginal_title());
         Picasso.get()
-                .load("https://image.tmdb.org/t/p/w500/"+nitvMovieModelList.get(position).getBackdrop_path())
+                .load("https://image.tmdb.org/t/p/w500/" + nitvMovieModelList.get(position).getBackdrop_path())
                 .placeholder(R.drawable.gif_loading_placeholder)
                 .fit()
                 .into(holder.movieImage);
         String adult = nitvMovieModelList.get(position).getAdult();
-        if (adult.equals("true")){
+        if (adult.equals("true")) {
             Picasso.get()
                     .load(R.drawable.image_adult_symbol)
                     .into((ImageView) holder.itemView.findViewById(R.id.MainMovieItemIsAdult));
-        }else{
+        } else {
             Picasso.get()
                     .load(R.drawable.image_no_adult_symbol)
                     .into((ImageView) holder.itemView.findViewById(R.id.MainMovieItemIsAdult));
         }
 
-         String original_language = nitvMovieModelList.get(position).getOriginal_language();
-         String overview = nitvMovieModelList.get(position).getOverview();
+        String original_language = nitvMovieModelList.get(position).getOriginal_language();
+        String overview = nitvMovieModelList.get(position).getOverview();
         String poster_path = nitvMovieModelList.get(position).getPoster_path();
-        String backdrop_path = nitvMovieModelList.get(position).getBackdrop_path();;
-         String release_date = nitvMovieModelList.get(position).getRelease_date();
-         int id = nitvMovieModelList.get(position).getId();
-         int vote_count = nitvMovieModelList.get(position).getVote_count();
-         float vote_average = nitvMovieModelList.get(position).getVote_average();
-
-
+        String backdrop_path = nitvMovieModelList.get(position).getBackdrop_path();
+        ;
+        String release_date = nitvMovieModelList.get(position).getRelease_date();
+        int id = nitvMovieModelList.get(position).getId();
+        int vote_count = nitvMovieModelList.get(position).getVote_count();
+        float vote_average = nitvMovieModelList.get(position).getVote_average();
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent myIntent = new Intent(mContext, NitvMovieDetail.class);
-                myIntent.putExtra("original_title",nitvMovieModelList.get(position).getOriginal_title());
-                myIntent.putExtra("original_language",original_language);
-                myIntent.putExtra("overview",overview);
-                myIntent.putExtra("poster_path",poster_path);
-                myIntent.putExtra("release_date",release_date);
-                myIntent.putExtra("backdrop_path",backdrop_path);
-                myIntent.putExtra("isadult",adult);
+                myIntent.putExtra("original_title", nitvMovieModelList.get(position).getOriginal_title());
+                myIntent.putExtra("original_language", original_language);
+                myIntent.putExtra("overview", overview);
+                myIntent.putExtra("poster_path", poster_path);
+                myIntent.putExtra("release_date", release_date);
+                myIntent.putExtra("backdrop_path", backdrop_path);
+                myIntent.putExtra("isadult", adult);
                 myIntent.putExtra("vote_count", vote_count);
                 myIntent.putExtra("vote_average", vote_average);
                 holder.itemView.getContext().startActivity(myIntent);

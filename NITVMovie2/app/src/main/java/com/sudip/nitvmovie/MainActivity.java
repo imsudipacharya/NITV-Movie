@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class GetMovie extends AsyncTask<String,String,String> {
+    private class GetMovie extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
 
@@ -63,31 +63,32 @@ public class MainActivity extends AppCompatActivity {
 
                     int data = isr.read();
                     while (data != -1) {
-                        current += (char)data;
+                        current += (char) data;
                         data = isr.read();
                     }
                     return current;
-                }catch (MalformedURLException e){
+                } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }finally {
-                    if (urlConnection != null){
+                } finally {
+                    if (urlConnection != null) {
                         urlConnection.disconnect();
                     }
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             return current;
         }
-        protected  void onPostExecute(String s){
+
+        protected void onPostExecute(String s) {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
 
-                for (int i = 0 ; i < jsonArray.length(); i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
                     NitvMovieModel nitvMovieModel = new NitvMovieModel();
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     nitvMovieModelList.add(nitvMovieModel);
 
                 }
-            }catch (JSONException e){
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             PutDataIntoRecyclerView(nitvMovieModelList);
@@ -113,12 +114,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private void PutDataIntoRecyclerView(List<NitvMovieModel> nitvMovieModelList) {
         nitvMovieAdapter = new NitvMovieAdapter(this, nitvMovieModelList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(nitvMovieAdapter);
         nitvMovieAdapter.notifyDataSetChanged();
     }
+
     private void ShowAlertToExit() {
         AlertDialog.Builder alertdialog = new AlertDialog.Builder(this);
         alertdialog.setMessage("Are You Sure ?");
@@ -145,4 +148,4 @@ public class MainActivity extends AppCompatActivity {
         ShowAlertToExit();
     }
 
-    }
+}
