@@ -34,13 +34,13 @@ public class NitvMovieDetail extends AppCompatActivity {
 
         ImageView moviePoster = (ImageView) findViewById(R.id.MovieDetailVideoPoster);
         Picasso.get()
-                .load("https://image.tmdb.org/t/p/w500/"+poster_path)
+                .load("https://image.tmdb.org/t/p/w500/" + poster_path)
                 .placeholder(R.drawable.gif_loading_placeholder)
                 .fit()
                 .into(moviePoster);
 
         Picasso.get()
-                .load("https://image.tmdb.org/t/p/w500/"+backdrop_path)
+                .load("https://image.tmdb.org/t/p/w500/" + backdrop_path)
                 .placeholder(R.drawable.gif_loading_placeholder)
                 .fit()
                 .into((ImageView) findViewById(R.id.MovieDetailMovieImage));
@@ -48,11 +48,11 @@ public class NitvMovieDetail extends AppCompatActivity {
         TextView movieTitle = findViewById(R.id.MovieDetailMovieTitle);
         movieTitle.setText(original_title);
 
-        if (isadult.equals("true")){
+        if (isadult.equals("true")) {
             Picasso.get()
                     .load(R.drawable.image_adult_symbol)
                     .into((ImageView) findViewById(R.id.MovieDetailForAdult));
-        }else{
+        } else {
             Picasso.get()
                     .load(R.drawable.image_no_adult_symbol)
                     .into((ImageView) findViewById(R.id.MovieDetailForAdult));
@@ -68,22 +68,22 @@ public class NitvMovieDetail extends AppCompatActivity {
             public void onClick(View view) {
                 video.setVisibility(View.VISIBLE);
                 moviePoster.setVisibility(View.GONE);
-                MediaController mediaController= new MediaController(NitvMovieDetail.this);
+                MediaController mediaController = new MediaController(NitvMovieDetail.this);
                 mediaController.setAnchorView(video);
                 video.setMediaController(mediaController);
                 video.requestFocus();
                 String uri
-                        = "https://ia801400.us.archive.org/21/items/gngkktmv480/%5B480%5DGinga%20Kikoutai%20Majestic%20Prince%20Movie%20Kakusei%20no%20Idenshi.mp4";
+                        = "https://media.geeksforgeeks.org/wp-content/uploads/20201217192146/Screenrecorder-2020-12-17-19-17-36-828.mp4?_=1";
                 video.setVideoURI(Uri.parse(uri));
                 video.start();
             }
         });
 
         TextView releasedDate = findViewById(R.id.MovieDetailReleaseDate);
-        releasedDate.setText("Released On :"+release_date);
+        releasedDate.setText("Released On :" + release_date);
 
         TextView totalVoting = findViewById(R.id.MovieDetailTotalVoting);
-        totalVoting.setText("Voting :");
+        totalVoting.setText("Voting :" + vote_count);
 
 
     }
